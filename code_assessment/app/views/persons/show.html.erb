@@ -1,0 +1,22 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-4">Person Details</h1>
+
+  <div class="bg-white p-6 rounded-lg shadow-lg">
+    <p><strong>Name:</strong> <%= @person.name %></p>
+    <p><strong>Address:</strong> <%= @person.address %></p>
+    <%= link_to 'Go Back', persons_path, class: "text-blue-500 hover:underline mt-4 inline-block" %>
+  </div>
+
+  <% if @demographic_data %>
+    <h2 class="text-2xl font-semibold mt-6 mb-4">Demographic Data</h2>
+    <ul class="bg-gray-100 p-6 rounded-lg">
+      <li class="mb-2">
+        <strong>State Code:</strong> <%= number_to_human(@demographic_data[2]) %> |
+        <strong>Population:</strong> <%= number_with_delimiter(@demographic_data[0]) %> |
+        <strong>Median Income:</strong> <%= number_to_human(@demographic_data[1]) %>
+      </li>
+    </ul>
+  <% else %>
+    <p class="text-gray-500">Demographic data is not available.</p>
+  <% end %>
+</div>

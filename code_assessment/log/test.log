@@ -1,0 +1,1309 @@
+  [1m[35m (76.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "schoolstatus_test"[0m
+  [1m[35m (232.4ms)[0m  [1m[35mCREATE DATABASE "schoolstatus_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (1.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "people" CASCADE[0m
+  [1m[35m (13.3ms)[0m  [1m[35mCREATE TABLE "people" ("id" bigserial primary key, "name" character varying(40) NOT NULL, "address" character varying(200) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_people_on_name" ON "people" ("name")[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240423173208)[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-04-26 12:07:05.600839', '2024-04-26 12:07:05.600844') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '7327713d7bb268912851972179dcfa4a492b5805', '2024-04-26 12:07:05.604910', '2024-04-26 12:07:05.604912') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (13.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.8ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 12:07:05.724405"], ["updated_at", "2024-04-26 12:07:05.724405"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 12:07:05.806457"], ["updated_at", "2024-04-26 12:07:05.806457"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 12:08:42.064736"], ["updated_at", "2024-04-26 12:08:42.064736"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 12:08:42.102007"], ["updated_at", "2024-04-26 12:08:42.102007"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (11.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 120)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 288)
+Completed 200 OK in 26ms (Views: 6.7ms | ActiveRecord: 0.0ms | Allocations: 5861)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 73)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 205)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 629)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.7ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 12ms (ActiveRecord: 6.5ms | Allocations: 1952)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.6ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 12:10:34.752296"], ["updated_at", "2024-04-26 12:10:34.752296"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 12:10:34.769184"], ["updated_at", "2024-04-26 12:10:34.769184"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 120)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 288)
+Completed 200 OK in 31ms (Views: 6.2ms | ActiveRecord: 0.0ms | Allocations: 7208)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 73)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 205)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 629)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.7ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 11ms (ActiveRecord: 6.1ms | Allocations: 1952)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 120)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 288)
+Completed 200 OK in 20ms (Views: 4.9ms | ActiveRecord: 0.0ms | Allocations: 7207)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 73)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 205)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 629)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.6ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 22ms (ActiveRecord: 17.2ms | Allocations: 1953)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 120)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 288)
+Completed 200 OK in 35ms (Views: 6.4ms | ActiveRecord: 0.0ms | Allocations: 7206)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 73)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 205)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 629)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.6ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 13ms (ActiveRecord: 8.2ms | Allocations: 1953)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 331)
+Completed 200 OK in 31ms (Views: 6.6ms | ActiveRecord: 0.0ms | Allocations: 7250)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 252)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 676)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.8ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 12ms (ActiveRecord: 7.2ms | Allocations: 1956)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 331)
+Completed 200 OK in 30ms (Views: 6.3ms | ActiveRecord: 0.0ms | Allocations: 7250)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.5ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 10ms (ActiveRecord: 5.8ms | Allocations: 1956)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 331)
+Completed 200 OK in 31ms (Views: 6.4ms | ActiveRecord: 0.0ms | Allocations: 7252)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.5ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 11ms (ActiveRecord: 6.9ms | Allocations: 1956)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 331)
+Completed 200 OK in 31ms (Views: 6.6ms | ActiveRecord: 0.0ms | Allocations: 7251)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.8ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:39:02.317969"], ["updated_at", "2024-04-26 12:39:02.317969"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:39:02.326778"], ["updated_at", "2024-04-26 12:39:02.326778"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 97)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | Allocations: 253)
+Completed 200 OK in 2556ms (Views: 1.6ms | ActiveRecord: 0.5ms | Allocations: 3176)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:39:04.888795"], ["updated_at", "2024-04-26 12:39:04.888795"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 252)
+Completed 200 OK in 1886ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 1626)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:39:06.793221"], ["updated_at", "2024-04-26 12:39:06.793221"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 899)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms | Allocations: 299)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 331)
+Completed 200 OK in 2576ms (Views: 6.7ms | ActiveRecord: 0.0ms | Allocations: 975510)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Eliseo Harvey"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Eliseo Harvey"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.312245"], ["updated_at", "2024-04-26 12:40:26.312245"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Isaiah McCullough"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Isaiah McCullough"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.315540"], ["updated_at", "2024-04-26 12:40:26.315540"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Diane McGlynn"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Diane McGlynn"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.318537"], ["updated_at", "2024-04-26 12:40:26.318537"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Prof. Amina Keeling"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Prof. Amina Keeling"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.321635"], ["updated_at", "2024-04-26 12:40:26.321635"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Roscoe Harber"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Roscoe Harber"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.324197"], ["updated_at", "2024-04-26 12:40:26.324197"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Miss Emma Hoeger"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.2ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Miss Emma Hoeger"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.326433"], ["updated_at", "2024-04-26 12:40:26.326433"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Katelyn Prosacco"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Katelyn Prosacco"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.328779"], ["updated_at", "2024-04-26 12:40:26.328779"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Rep. Lanie Marks"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Rep. Lanie Marks"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.331867"], ["updated_at", "2024-04-26 12:40:26.331867"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Johnnie Grimes II"], ["LIMIT", 1]]
+  [1m[36mPerson Create (1.2ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Johnnie Grimes II"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.335288"], ["updated_at", "2024-04-26 12:40:26.335288"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Melodee Osinski LLD"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Melodee Osinski LLD"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.338661"], ["updated_at", "2024-04-26 12:40:26.338661"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#index as HTML
+  Parameters: {"page"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 252)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 677)
+  [1m[36mPerson Count (3.4ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "people" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 8], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Alberto Terry Esq."], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alberto Terry Esq."], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:26.351253"], ["updated_at", "2024-04-26 12:40:26.351253"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"21"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 97)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 253)
+Completed 200 OK in 1732ms (Views: 1.4ms | ActiveRecord: 0.5ms | Allocations: 3163)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Pres. Olin Schmitt"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Pres. Olin Schmitt"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:28.089139"], ["updated_at", "2024-04-26 12:40:28.089139"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"22"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 252)
+Completed 200 OK in 1631ms (Views: 1.4ms | ActiveRecord: 0.3ms | Allocations: 1627)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Apryl Schoen"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Apryl Schoen"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:40:29.735943"], ["updated_at", "2024-04-26 12:40:29.735943"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"23"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.3ms | Allocations: 900)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms | Allocations: 301)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 331)
+Completed 200 OK in 355ms (Views: 6.9ms | ActiveRecord: 0.0ms | Allocations: 287104)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Miss Alec Spinka"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Miss Alec Spinka"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.068008"], ["updated_at", "2024-04-26 12:42:04.068008"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Eddie Gislason"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Eddie Gislason"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.071405"], ["updated_at", "2024-04-26 12:42:04.071405"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Ismael Conroy DO"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Ismael Conroy DO"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.073913"], ["updated_at", "2024-04-26 12:42:04.073913"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Alysia Lesch Sr."], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alysia Lesch Sr."], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.076240"], ["updated_at", "2024-04-26 12:42:04.076240"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Cherrie Sauer"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Cherrie Sauer"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.078330"], ["updated_at", "2024-04-26 12:42:04.078330"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Annita Paucek"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Annita Paucek"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.080869"], ["updated_at", "2024-04-26 12:42:04.080869"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Mitchel Kutch"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mitchel Kutch"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.084250"], ["updated_at", "2024-04-26 12:42:04.084250"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Rocco Huel"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Rocco Huel"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.086597"], ["updated_at", "2024-04-26 12:42:04.086597"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Ms. Nicol Ziemann"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.2ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Ms. Nicol Ziemann"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.088829"], ["updated_at", "2024-04-26 12:42:04.088829"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Boyce Ankunding"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Boyce Ankunding"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.091265"], ["updated_at", "2024-04-26 12:42:04.091265"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#index as HTML
+  Parameters: {"page"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 677)
+  [1m[36mPerson Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "people" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 8], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Mrs. Santo Price"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mrs. Santo Price"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:04.100559"], ["updated_at", "2024-04-26 12:42:04.100559"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"34"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 97)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 253)
+Completed 200 OK in 1674ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 3158)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Rev. Kandice Jones"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Rev. Kandice Jones"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:05.780752"], ["updated_at", "2024-04-26 12:42:05.780752"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"35"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 252)
+Completed 200 OK in 1629ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 1627)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Alvin Corkery Sr."], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alvin Corkery Sr."], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:42:07.427079"], ["updated_at", "2024-04-26 12:42:07.427079"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"36"}
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 900)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.4ms | Allocations: 301)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 331)
+Completed 200 OK in 345ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 287150)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Gregory Kunze"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.8ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Gregory Kunze"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.233629"], ["updated_at", "2024-04-26 12:45:31.233629"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Mrs. Hyman Mann"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mrs. Hyman Mann"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.237631"], ["updated_at", "2024-04-26 12:45:31.237631"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Marci Lueilwitz"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Marci Lueilwitz"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.240058"], ["updated_at", "2024-04-26 12:45:31.240058"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Michelina Schaefer"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Michelina Schaefer"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.242348"], ["updated_at", "2024-04-26 12:45:31.242348"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Derrick Bradtke"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Derrick Bradtke"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.244950"], ["updated_at", "2024-04-26 12:45:31.244950"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Lottie Brakus"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Lottie Brakus"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.248337"], ["updated_at", "2024-04-26 12:45:31.248337"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Carolann Konopelski"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Carolann Konopelski"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.251016"], ["updated_at", "2024-04-26 12:45:31.251016"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Valentin Kris Sr."], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.2ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Valentin Kris Sr."], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.253316"], ["updated_at", "2024-04-26 12:45:31.253316"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Jenelle Nicolas II"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jenelle Nicolas II"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.255649"], ["updated_at", "2024-04-26 12:45:31.255649"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Amb. Chet Stracke"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.2ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Amb. Chet Stracke"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.257928"], ["updated_at", "2024-04-26 12:45:31.257928"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#index as HTML
+  Parameters: {"page"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 252)
+Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 677)
+  [1m[36mPerson Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "people" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 8], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Barrett Schaden"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barrett Schaden"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:31.280557"], ["updated_at", "2024-04-26 12:45:31.280557"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"47"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 47], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 97)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 253)
+Completed 200 OK in 1650ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 3162)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Msgr. Dayna Murray"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Msgr. Dayna Murray"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:32.936761"], ["updated_at", "2024-04-26 12:45:32.936761"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"48"}
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | Allocations: 252)
+Completed 200 OK in 1667ms (Views: 1.7ms | ActiveRecord: 0.4ms | Allocations: 1627)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Amb. Gordon Mante"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Amb. Gordon Mante"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:45:34.620670"], ["updated_at", "2024-04-26 12:45:34.620670"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"49"}
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.2ms | Allocations: 900)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms | Allocations: 301)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 331)
+Completed 200 OK in 300ms (Views: 7.3ms | ActiveRecord: 0.0ms | Allocations: 287044)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Adrien Waelchi"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Adrien Waelchi"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:05.973691"], ["updated_at", "2024-04-26 12:46:05.973691"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Robby Sipes JD"], ["LIMIT", 1]]
+  [1m[36mPerson Create (10.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Robby Sipes JD"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:05.977059"], ["updated_at", "2024-04-26 12:46:05.977059"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Alonzo Greenholt"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alonzo Greenholt"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:05.990253"], ["updated_at", "2024-04-26 12:46:05.990253"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Miss Karima Ferry"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Miss Karima Ferry"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:05.993239"], ["updated_at", "2024-04-26 12:46:05.993239"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Jacinta Gutkowski"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jacinta Gutkowski"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:05.997316"], ["updated_at", "2024-04-26 12:46:05.997316"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Tommie Osinski"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tommie Osinski"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:06.000333"], ["updated_at", "2024-04-26 12:46:06.000333"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Stewart Aufderhar"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Stewart Aufderhar"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:06.002957"], ["updated_at", "2024-04-26 12:46:06.002957"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Warner Senger"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Warner Senger"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:06.005288"], ["updated_at", "2024-04-26 12:46:06.005288"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Quinton Connelly III"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Quinton Connelly III"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:06.007519"], ["updated_at", "2024-04-26 12:46:06.007519"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Fredric Koss"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Fredric Koss"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:06.024706"], ["updated_at", "2024-04-26 12:46:06.024706"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#index as HTML
+  Parameters: {"page"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms | Allocations: 680)
+  [1m[36mPerson Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "people" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 8], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Rev. Elinore Haag"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Rev. Elinore Haag"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:06.034455"], ["updated_at", "2024-04-26 12:46:06.034455"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"60"}
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 60], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 97)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 253)
+Completed 200 OK in 1713ms (Views: 1.7ms | ActiveRecord: 0.5ms | Allocations: 3161)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Nickolas Fritsch"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Nickolas Fritsch"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:07.753184"], ["updated_at", "2024-04-26 12:46:07.753184"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"61"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 61], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | Allocations: 252)
+Completed 200 OK in 1630ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 1627)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Cleotilde Ernser"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Cleotilde Ernser"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 12:46:09.399404"], ["updated_at", "2024-04-26 12:46:09.399404"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"62"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 900)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.7ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 12:53:21.729880"], ["updated_at", "2024-04-26 12:53:21.729880"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 12:53:21.733312"], ["updated_at", "2024-04-26 12:53:21.733312"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.5ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.7ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 12:55:22.920585"], ["updated_at", "2024-04-26 12:55:22.920585"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 12:55:22.924163"], ["updated_at", "2024-04-26 12:55:22.924163"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.7ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 12:58:22.786945"], ["updated_at", "2024-04-26 12:58:22.786945"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 12:58:22.790895"], ["updated_at", "2024-04-26 12:58:22.790895"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (1.0ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:01:10.694596"], ["updated_at", "2024-04-26 13:01:10.694596"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:01:10.699591"], ["updated_at", "2024-04-26 13:01:10.699591"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.8ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:03:00.051544"], ["updated_at", "2024-04-26 13:03:00.051544"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:03:00.056730"], ["updated_at", "2024-04-26 13:03:00.056730"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.5ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.6ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:03:35.626023"], ["updated_at", "2024-04-26 13:03:35.626023"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:03:35.630037"], ["updated_at", "2024-04-26 13:03:35.630037"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.6ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:04:59.055106"], ["updated_at", "2024-04-26 13:04:59.055106"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:05:02.353685"], ["updated_at", "2024-04-26 13:05:02.353685"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.8ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:06:31.366302"], ["updated_at", "2024-04-26 13:06:31.366302"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:06:32.530178"], ["updated_at", "2024-04-26 13:06:32.530178"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:08:31.593201"], ["updated_at", "2024-04-26 13:08:31.593201"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:08:31.596109"], ["updated_at", "2024-04-26 13:08:31.596109"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 331)
+Completed 200 OK in 205ms (Views: 8.5ms | ActiveRecord: 0.0ms | Allocations: 285692)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Diedra Halvorson"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.9ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Diedra Halvorson"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.369800"], ["updated_at", "2024-04-26 13:13:59.369800"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Rep. Hai Hane"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Rep. Hai Hane"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.390530"], ["updated_at", "2024-04-26 13:13:59.390530"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Albertine Wunsch"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Albertine Wunsch"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.394134"], ["updated_at", "2024-04-26 13:13:59.394134"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Gaylene Hessel LLD"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Gaylene Hessel LLD"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.397043"], ["updated_at", "2024-04-26 13:13:59.397043"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Karina Rath"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Karina Rath"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.399860"], ["updated_at", "2024-04-26 13:13:59.399860"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Carlos Gleason"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Carlos Gleason"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.403871"], ["updated_at", "2024-04-26 13:13:59.403871"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Bernardine Lemke"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Bernardine Lemke"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.407172"], ["updated_at", "2024-04-26 13:13:59.407172"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Lesley Bailey Ret."], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Lesley Bailey Ret."], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.409531"], ["updated_at", "2024-04-26 13:13:59.409531"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Margherita Tillman"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Margherita Tillman"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.411742"], ["updated_at", "2024-04-26 13:13:59.411742"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Vincenzo Murazik Ret."], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Vincenzo Murazik Ret."], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.414365"], ["updated_at", "2024-04-26 13:13:59.414365"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#index as HTML
+  Parameters: {"page"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering persons/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 678)
+  [1m[36mPerson Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "people" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 8], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (10.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Heidi Medhurst"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.4ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Heidi Medhurst"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:13:59.464573"], ["updated_at", "2024-04-26 13:13:59.464573"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"91"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 91], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 97)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 253)
+Completed 200 OK in 2011ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 3159)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Prof. Devin Dach"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Prof. Devin Dach"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:14:01.493937"], ["updated_at", "2024-04-26 13:14:01.493937"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"92"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 92], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 252)
+Completed 200 OK in 1732ms (Views: 1.4ms | ActiveRecord: 0.2ms | Allocations: 1626)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "Napoleon Toy"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Napoleon Toy"], ["address", "123 Main St, MS, 90210"], ["created_at", "2024-04-26 13:14:03.240145"], ["updated_at", "2024-04-26 13:14:03.240145"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"93"}
+  [1m[36mPerson Load (0.2ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 93], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering persons/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered persons/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 96)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 252)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 898)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by PersonsController#show as HTML
+  Parameters: {"id"=>"999"}
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2[0m  [["id", 999], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms | Allocations: 308)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.5ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JohnDoe"], ["address", "123 Main St"], ["created_at", "2024-04-26 13:14:03.253912"], ["updated_at", "2024-04-26 13:14:03.253912"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JaneDoe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "JaneDoe"], ["address", "456 Oak St"], ["created_at", "2024-04-26 13:14:03.257361"], ["updated_at", "2024-04-26 13:14:03.257361"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "people"[0m
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "JohnDoe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 13:14:03.279551"], ["updated_at", "2024-04-26 13:14:03.279551"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mPerson Create (0.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["address", "123 Main St, 90210"], ["created_at", "2024-04-26 13:14:03.298261"], ["updated_at", "2024-04-26 13:14:03.298261"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPerson Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPerson Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "people" WHERE "people"."name" = $1 LIMIT $2[0m  [["name", "John Doe"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m

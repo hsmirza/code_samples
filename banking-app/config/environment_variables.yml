@@ -1,0 +1,18 @@
+development:
+  DATABASE_NAME: "banking_app_development"
+  DATABASE_USERNAME: "postgres"
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_HOST: "127.0.0.1"
+  DATABASE_PORT: "5432"
+test:
+  DATABASE_NAME: "banking_app_test"
+  DATABASE_USERNAME: "postgres"
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_HOST: "127.0.0.1"
+  DATABASE_PORT: "5432"
+production:
+  DATABASE_NAME: "banking_app"
+  DATABASE_USERNAME: "postgres"
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_HOST: "127.0.0.1"
+  DATABASE_PORT: "5432"
